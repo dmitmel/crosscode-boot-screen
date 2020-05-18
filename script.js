@@ -227,7 +227,7 @@ let bootInProgress = false;
  * @param {?{ debug?: boolean, safe?: boolean, vanilla?: boolean }} options
  */
 async function boot({ debug, safe, vanilla } = {}) {
-  if (bootInProgress) return console.log('fail');
+  if (bootInProgress) return;
   bootInProgress = true;
 
   stopBootTimer();
