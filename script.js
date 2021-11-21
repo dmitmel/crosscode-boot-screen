@@ -42,6 +42,16 @@ main(document.body);
  * @param {HTMLElement} rootElement
  */
 async function main(rootElement) {
+  let shouldBeFullscreen = localStorage.getItem('IG_FULLSCREEN') === 'true';
+  var nwWindow = nw.Window.get();
+  if (nwWindow.isFullscreen !== shouldBeFullscreen) {
+    if (shouldBeFullscreen) {
+      nwWindow.enterFullscreen();
+    } else {
+      nwWindow.leaveFullscreen();
+    }
+  }
+
   let logoAtlas = await loadImage('/assets/media/gui/title-logo-new.png');
 
   window.addEventListener('load', () => {
@@ -292,7 +302,5 @@ function wait(seconds) {
  * @returns {Promise<void>}
  */
 function showDevTools() {
-  return new Promise((resolve) =>
-    nw.Window.get().showDevTools(undefined, resolve),
-  );
+  return new Promise((resolve) => nw.Window.get().showDevTools(undefined, resolve));
 }
